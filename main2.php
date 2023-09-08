@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+  </head>
+  <body>
+
+    <?php
+      include('header2.php') 
+    ?>
+
+    <div style="padding: 30px;height: 1000px; background-color: white; font-family: 'Poppins', sans-serif;">
+      <?php
+        if (!empty($_SESSION['data']['user_login'])) 
+        {
+          echo '<h2 style="text-align: center">Scroll down to see your results!</h2>';
+          echo '<br>';
+          echo '<div align="right">';       
+          include('connect.php');
+          $user_status = $_SESSION['data']['user_status'];
+          if ($user_status == 'teacher') 
+          { 
+            echo '<table>';
+            echo '<tr>';
+            echo '<td>';
+            echo '<div class="input-group mb-3">';
+            echo '<a href="edit.php" class="btn btn-info" role="button" style="float: right">Edit row</a>';
+            echo '</div>';
+            echo '</td>';
+            echo '<td>';
+            echo '<form action="deletehandler.php" method="POST">';
+            echo '<div class="input-group mb-3">';
+            echo '<input type="text" style="width: 125px" placeholder="Enter ResultsID" name="resultsID">';
+            echo '<div class="input-group-prepend">';
+            echo '<button class="btn btn-danger" type="submit">Delete row</button>';  
+            echo '</div>';
+            echo '</div>';
+            echo '</form>';
+            echo '</td>';
+            echo '</tr>';
+            echo '</table>';
+            echo '<br>';
+            echo '<hr>';
+            echo '<br>';
+            include('handlermain2.php');
+          }
+          echo '</div>';
+        }
+        else 
+        {
+          echo '<div class="alert alert-warning" align="center"><strong>Warning!</strong> You must log in first!</div>';
+        }
+      ?>
+    </div>
+
+    <div style ="padding: 20px; text-align: center; background: white; margin-top: 20px;">
+      <h3>Coded by Bexultan Khabiyev, 2021</h3>
+    </div>
+
+  </body>
+</html>
